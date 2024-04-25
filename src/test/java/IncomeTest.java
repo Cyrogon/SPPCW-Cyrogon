@@ -1,26 +1,39 @@
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import sppcw.Income;
 import sppcw.Rate;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("Income Enum tests")
 public class IncomeTest {
 
     @Test
-    public void testIncome() {
-        Income basicInc = new Income(49000, 0);
-        Income basicEdgeInc = new Income(50000, 0);
-        Income higherInc = new Income(140000, 0);
-        Income higherEdgeInc = new Income(150000, 0);
-        Income additionalInc = new Income(200000, 0);
-        Income withSave = new Income(149000, 2000);
+    @DisplayName("Expected Data Tests")
+    public void testRegularIncome() {
 
+        Income basicInc = new Income(49000, 0);
+        Income higherInc = new Income(140000, 0);
+        Income additionalInc = new Income(200000, 0);
 
         assertEquals(Rate.BASIC, basicInc.taxBand());
-        assertEquals(Rate.BASIC, basicEdgeInc.taxBand());
         assertEquals(Rate.HIGHER, higherInc.taxBand());
-        assertEquals(Rate.HIGHER, higherEdgeInc.taxBand());
         assertEquals(Rate.ADDITIONAL, additionalInc.taxBand());
-        assertEquals(Rate.HIGHER, withSave.taxBand());
+
+    }
+
+    @Test
+    @DisplayName("Edge Case Data Tests")
+    public void testEdgeCases() {
+        Income basicEdgeInc = new Income(50000, 0);
+        Income higherEdgeInc = new Income(150000, 0);
+
+        assertEquals(Rate.BASIC, basicEdgeInc.taxBand());
+        assertEquals(Rate.HIGHER, higherEdgeInc.taxBand());
+    }
+
+    @Test
+    @DisplayName("Test Savings")
+    public void testSavings() {
+        Income withSave = new Income(149000, 2000);
+        assertEquals(Rate.ADDITIONAL, withSave.taxBand());
     }
 }
