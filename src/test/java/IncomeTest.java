@@ -7,6 +7,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class IncomeTest {
 
     @Test
+    @DisplayName("Testing Work Income Getter")
+    public void testIncomeGetter() {
+
+        Income income= new Income(200000, 0);
+
+        assertEquals(200000, income.getWorkIncome());
+
+    }
+
+    @Test
+    @DisplayName("Testing Work Savings Getter")
+    public void testSavingsGetter() {
+        Income income= new Income(0, 200000);
+        assertEquals(200000, income.getSavingsIncome());
+    }
+
+    @Test
     @DisplayName("Expected Data Tests")
     public void testRegularIncome() {
 

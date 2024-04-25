@@ -17,7 +17,7 @@ public class Deductions {
     public double totalDeductions(){
         double total = 0;
         for (Double d : allowableDeductions.values()){
-            total = d;
+            total += d;
         }
         return total;
     }

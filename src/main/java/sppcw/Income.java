@@ -1,5 +1,8 @@
 package sppcw;
 
+import lombok.Getter;
+
+@Getter
 public class Income {
 
     private double workIncome;
@@ -9,23 +12,15 @@ public class Income {
 
     private static final double HIGHER_RATE_LIMIT = 150000;
 
-    public double getWorkIncome() {
-        return workIncome;
-    }
-
-    public double getSavingsIncome() {
-        return savingsIncome;
-    }
-
     public Income(double workIncome, double savingsIncome){
         this.workIncome = workIncome;
-        savingsIncome = savingsIncome;
+        this.savingsIncome = savingsIncome;
     }
 
     public Rate taxBand(){
-        if((workIncome + savingsIncome)<BASIC_RATE_LIMIT)
+        if((workIncome + savingsIncome)<=BASIC_RATE_LIMIT)
             return Rate.BASIC;
-        else if((workIncome + savingsIncome)<HIGHER_RATE_LIMIT)
+        else if((workIncome + savingsIncome)<=HIGHER_RATE_LIMIT)
             return Rate.HIGHER;
         else
             return Rate.ADDITIONAL;
